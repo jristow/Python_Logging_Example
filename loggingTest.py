@@ -2,6 +2,7 @@ import logging
 import logstash
 import sys
 import time
+from random import randint
 
 test_logger = logging.getLogger('python-logstash-logger')
 test_logger.setLevel(logging.INFO)
@@ -11,15 +12,18 @@ test_logger.error('python-logstash: test logstash error message')
 test_logger.info('python-logstash: test logstash info message')
 test_logger.warning('python-logstash: test logstash warning message')
 
+errorMessageLog = test_logger.error('python-logstash: This is an error message!')
+infoMessageLog = test_logger.info('python-logstash: This is an informational message.')
+warningMessageLog = test_logger.warning('python-logstash: This is a warning message')
 
-extra = {
-    'test_string': 'python version' + repr(sys.version_info),
-    'test_boolean': True,
-    'test_dict': {'a': 1, 'b': 'c'},
-    'test_float': 1.23,
-    'test_list': [1,2,3],
-}
+for i in range(1000):
+    n = randint(0,4)
+    if n == 1:
+        errorMessageLog
+    elif n == 2:
+        infoMessageLog
+    elif n == 3:
+        warningMessageLog
 
-test_logger.info('python-logstash: test extra fields', extra=extra)
 
-print("It ran")
+
